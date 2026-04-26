@@ -1,6 +1,8 @@
 import { Command } from 'commander';
 import fs from 'fs/promises';
 import path from 'path';
+import validations from '../validations/generateValidations.js';
+import { runValidations } from '../utils/runValidations.js';
 
 const generate = new Command('generate');
 const basePath = process.cwd();
@@ -10,22 +12,35 @@ generate
     .alias('g')
     .argument('<featureName>')
     .action(async (featureName) => {
-        const pluralName = featureName + 's';
+        try {
+            const name = featureName?.trim();
 
-        const structure = {
-            entity: `${featureName}.java`,
-            service: `${featureName}Service.java`,
-            controller: `${featureName}Controller.java`,
-        };
+            const validationError = await runValidations(validations, name);
+            if (validationError) {
+                console.error(validationError);
+                process.exit(1);
+            }
 
-        await Promise.all(
-            Object.entries(structure).map(async ([folder, file]) => {
-                const folderPath = path.join(basePath, pluralName, folder);
+            const structure = {
+                entity: `${name}.java`,
+                service: `${name}Service.java`,
+                controller: `${name}Controller.java`,
+            };
 
-                await fs.mkdir(folderPath, { recursive: true });
-                await fs.writeFile(path.join(folderPath, file), '');
-            })
-        )
+            await Promise.all(
+                Object.entries(structure).map(async ([folder, file]) => {
+                    const folderPath = path.join(basePath, name, folder);
+
+                    await fs.mkdir(folderPath, { recursive: true });
+                    await fs.writeFile(path.join(folderPath, file), '');
+                })
+            )
+
+            console.log('Feature created successfully');
+        } catch (error) {
+            console.error(error.message);
+            process.exit(1);
+        }
 
     });
 
