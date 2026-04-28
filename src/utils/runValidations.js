@@ -1,5 +1,5 @@
-export const runValidations = async (validations, value) => {
+export const runValidations = (validations, value) => {
     for (const validation of validations) {
-        await validation(value);
+        validation(value);
     }
 };

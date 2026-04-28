@@ -1,4 +1,4 @@
-import fs from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 
@@ -17,16 +17,10 @@ const alphabeticalName = (name) => {
 };
 
 
-const featureExists = async (name) => {
+const featureExists = (name) => {
     const featurePath = path.join(process.cwd(), name);
 
-    try {
-        await fs.stat(featurePath);
-        throw new Error('Feature already exists');
-    } catch (err) {
-        if (err.code === 'ENOENT') return;
-        throw err;
-    }
+    if (fs.existsSync(featurePath)) throw new Error('Feature already exists');
 };
 
 const validations = [
