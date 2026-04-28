@@ -1,30 +1,31 @@
 import fs from 'fs/promises';
 import path from 'path';
+import chalk from 'chalk';
+
 const NotNullName = (name) => {
-    if (!name) return 'Feature name is required';
+    if (!name) throw new Error('Feature name is required');
     return null;
 };
 
 const minLengthName = (name) => {
-    if (name.length < 3) return 'Feature name must be at least 3 characters';
+    if (name.length < 3) throw new Error('Feature name must be at least 3 characters');
     return null;
 };
 
 const alphabeticalName = (name) => {
-    if (!name.match(/^[a-zA-Z]+$/)) return 'Feature name must be alphabetical';
-    return null;
+    if (!name.match(/^[a-zA-Z]+$/)) throw new Error('Feature name must be alphabetical');
 };
 
-export const featureDoesNotExist = async (name) => {
+
+const featureExists = async (name) => {
     const featurePath = path.join(process.cwd(), name);
 
     try {
         await fs.stat(featurePath);
-        return 'Feature already exists';
+        throw new Error('Feature already exists');
     } catch (err) {
-        if (err.code === 'ENOENT') return null;
-
-        return 'Unable to check feature existence';
+        if (err.code === 'ENOENT') return;
+        throw err;
     }
 };
 
@@ -32,7 +33,7 @@ const validations = [
     NotNullName,
     minLengthName,
     alphabeticalName,
-    featureDoesNotExist
+    featureExists
 ];
 
 export default validations;

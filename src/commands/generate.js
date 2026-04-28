@@ -15,11 +15,7 @@ generate
         try {
             const name = featureName?.trim();
 
-            const validationError = await runValidations(validations, name);
-            if (validationError) {
-                console.error(validationError);
-                process.exit(1);
-            }
+            await runValidations(validations, name);
 
             const structure = {
                 entity: `${name}.java`,
