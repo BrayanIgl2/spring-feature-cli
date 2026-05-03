@@ -2,9 +2,8 @@
 
 import { Command } from 'commander';
 import generateCommand from './commands/generate.js';
+
 const program = new Command();
-
-
 
 program
     .name('spring-feature-cli')
