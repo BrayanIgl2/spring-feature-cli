@@ -1,15 +1,12 @@
 import fs from 'fs';
 import path from 'path';
-import chalk from 'chalk';
 
 const NotNullName = (name) => {
     if (!name) throw new Error('Feature name is required');
-    return null;
 };
 
 const minLengthName = (name) => {
     if (name.length < 3) throw new Error('Feature name must be at least 3 characters');
-    return null;
 };
 
 const alphabeticalName = (name) => {

@@ -1,15 +1,16 @@
 
 import { runValidations } from '../utils/runValidations.js';
 import { logger } from '../utils/logger.js';
+import { scanProjectPath } from '../utils/projectScanner.js';
 import fs from 'fs';
 import path from 'path';
 import validations from '../validations/generateValidations.js';
-
 
 export function generateFeature(name) {
 
     const basePath = process.cwd();
 
+    scanProjectPath();
     runValidations(validations, name);
 
     const structure = {
