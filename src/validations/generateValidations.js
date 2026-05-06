@@ -14,6 +14,7 @@ const alphabeticalName = (name) => {
 };
 
 
+// TODO: Change path to Java Package Path
 const featureExists = (name) => {
     const featurePath = path.join(process.cwd(), name);
 
