@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { getMainClassDirectory } from '../utils/javaPackageResolver.js'
 
 const NotNullName = (name) => {
     if (!name) throw new Error('Feature name is required');
@@ -13,10 +14,8 @@ const alphabeticalName = (name) => {
     if (!name.match(/^[a-zA-Z]+$/)) throw new Error('Feature name must be alphabetical');
 };
 
-
-// TODO: Change path to Java Package Path
 const featureExists = (name) => {
-    const featurePath = path.join(process.cwd(), name);
+    const featurePath = path.join(getMainClassDirectory(), name);
 
     if (fs.existsSync(featurePath)) throw new Error('Feature already exists');
 };

@@ -1,11 +1,37 @@
 import fs from 'fs';
 import path from 'path';
 
-export function getJavaPath() {
+export function getMainClassFile() {
     const rootPath = findProjectRoot();
-    return path.join(rootPath, 'src', 'main', 'java');
+    let current = path.join(rootPath, 'src', 'main', 'java');
+
+    const FilePath = searchInDirectory(current);
+    if(!FilePath) throw new Error('@SpringBootApplication not found');
+    return searchInDirectory(current);
+
 }
 
+function searchInDirectory(DirectoryPath) {
+    const files = fs.readdirSync(DirectoryPath);
+
+    for (const file of files) {
+        const filePath = path.join(DirectoryPath, file)
+        const stats = fs.statSync(filePath);
+
+        if (stats.isFile() && file.endsWith(".java")) {
+            const content = fs.readFileSync(filePath, 'utf-8');
+
+            if (content.includes('@SpringBootApplication')) {
+                return filePath;
+            }
+        } else if (stats.isDirectory()) {
+            const result = searchInDirectory(filePath);
+            if (result) return result;
+
+        }
+    }
+    return null;
+}
 
 function findProjectRoot(start = process.cwd()) {
     let current = start;
