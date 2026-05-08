@@ -1,4 +1,3 @@
-
 import { runValidations } from '../utils/runValidations.js';
 import { logger } from '../utils/logger.js';
 import { getJavaPath } from '../utils/projectScanner.js';
@@ -10,9 +9,15 @@ import validations from '../validations/generateValidations.js';
 export function generateFeature(name) {
     const javaPath = getJavaPath();
     runValidations(validations, name);
+    const context = { name, javaPath };
+    
+    generateFeatureStructure(context);
+    logger.success(`\n` + 'Feature created successfully');
+}
 
-    const structure = {
-        entity: `${name}.java`,
+function generateFeatureStructure({ name, javaPath }) {
+        const structure = {
+        domain: `${name}.java`,
         service: `${name}Service.java`,
         controller: `${name}Controller.java`,
     };
@@ -24,6 +29,4 @@ export function generateFeature(name) {
         fs.mkdirSync(folderPath, { recursive: true });
         fs.writeFileSync(path.join(folderPath, file), '');
     }
-
-    logger.success(`\n` + 'Feature created successfully');
 }
