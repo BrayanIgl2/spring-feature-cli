@@ -1,31 +1,25 @@
 {
   "name": "spring-feature-cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "CLI para generar features de Spring Boot",
   "type": "module",
-
   "bin": {
     "spfc": "bin/index.js"
   },
-
   "files": [
     "src",
     "bin"
-    ],
-
+  ],
   "scripts": {
     "dev": "node src/index.js"
   },
-
   "keywords": [
     "spring",
     "spring-boot",
     "cli",
     "generator"
   ],
-
   "license": "MIT",
-
   "dependencies": {
     "chalk": "^5.4.1",
     "commander": "^13.1.0",
