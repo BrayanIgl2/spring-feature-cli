@@ -1,68 +1,93 @@
 # spring-feature-cli
 
-`spring-feature-cli` is a personal project to learn how to build command-line tools with Node.js. It is designed to generate basic Spring Boot artifacts using a feature-based structure and clean architecture principles.
+`spring-feature-cli` is a Node.js CLI tool that generates Spring Boot feature-based boilerplate using templates.
+
+It helps automate the creation of common backend layers such as entities, services, repositories, and controllers following a clean and consistent structure.
+
+---
 
 ## Purpose
 
-- Learn Node.js and the CLI ecosystem
-- Practice using `commander`, `inquirer`, and `handlebars`
-- Automate repetitive code generation for Spring Boot projects
-- Generate entities, services, repositories, and controllers with a simple workflow
+This project was built to:
 
-## Features
+- Practice building real-world CLI tools with Node.js
+- Learn `commander`, `inquirer`, and `handlebars`
+- Automate repetitive Spring Boot boilerplate generation
+- Apply feature-based architecture patterns
 
-- Executable CLI via the `spfc` command
-- Template generation using `handlebars`
-- Input validation and project detection
-- Supports generating:
-  - `Entity`
-  - `Repository`
-  - `Service`
-  - `Controller`
+---
 
-## Installation
+## ⚙️ Installation
+
+### Global installation (recommended)
 
 ```bash
-npm install
+npm install -g spring-feature-cli
 ```
 
-To install globally (optional):
-
+### Local usage (development)
 ```bash
-npm install -g .
+npm install
+npm run dev
 ```
 
 ## Usage
 
-Run the tool from the project directory:
+### Generate a Spring Boot feature:
 
 ```bash
-spfc generate
+spfc generate User
 ```
 
-Or in development mode:
+or
 
 ```bash
-npm run dev
+spfc g User 
 ```
+This will generate a full structure for the feature (Entity, Repository, Service, Controller).
 
-## Project Structure
+### 🧱 Generated Structure
 
-- `bin/index.js`: executable CLI entry point
-- `src/index.js`: main CLI logic
-- `src/commands/generate.js`: generate command
-- `src/actions/generateActions.js`: file creation actions
-- `src/validations/generateValidations.js`: input validations
-- `src/utils/`: utilities for Java package resolution, project scanning, and template compilation
-- `src/templates/`: Handlebars templates for generated artifacts
+The CLI generates:
 
-## Key Dependencies
+- Entity  
+- Repository  
+- Service  
+- Controller  
 
-- `commander` for defining CLI commands
-- `inquirer` for interactive prompts
-- `handlebars` for template generation
-- `chalk` for console styling
+All based on Handlebars templates and a consistent naming convention.
 
-## License
+## 📁 Project Structure
 
-This project is licensed under `MIT`.
+- `bin/index.js` → CLI entry point  
+- `src/index.js` → Main CLI logic  
+- `src/commands/` → Command definitions  
+- `src/actions/` → Generation logic  
+- `src/validations/` → Input validation layer  
+- `src/utils/` → Helpers (logging, scanning, template compilation, etc.)  
+- `src/templates/` → Handlebars templates for generated code  
+
+---
+
+## 🧰 Key Dependencies
+
+- `commander` → CLI command handling  
+- `inquirer` → Interactive prompts  
+- `handlebars` → Template engine  
+- `chalk` → Terminal styling  
+
+---
+
+## ⚠️ Requirements
+
+- Node.js >= 16  
+
+---
+
+## 💡 Notes
+
+This tool assumes a Spring Boot project structure and is intended to be used inside a backend project where Java packages are detected automatically.
+
+📄 License
+
+MIT
