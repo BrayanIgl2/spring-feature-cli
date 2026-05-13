@@ -5,14 +5,13 @@
   "type": "module",
 
   "bin": {
-    "spfc": "./bin/index.js"
+    "spfc": "bin/index.js"
   },
 
   "files": [
     "src",
-    "bin",
-    "src"
-  ],
+    "bin"
+    ],
 
   "scripts": {
     "dev": "node src/index.js"
