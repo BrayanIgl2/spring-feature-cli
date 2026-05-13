@@ -1,4 +1,4 @@
-package {{packageName}}.domain;
+package {{packageName}}.{{featureName}}.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,15 +7,14 @@ import jakarta.persistence.GenerationType;
 
 
 @Entity
-public class {{FeatureName}} {
+public class {{featureName}} {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    public {{FeatureName}}() {
+    public {{featureName}}() {
     }
-
 
      public Long getId() {
         return id;

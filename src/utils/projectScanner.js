@@ -7,7 +7,7 @@ export function getMainClassFile() {
 
     const FilePath = searchInDirectory(current);
     if(!FilePath) throw new Error('@SpringBootApplication not found');
-    return searchInDirectory(current);
+    return FilePath;
 
 }
 
