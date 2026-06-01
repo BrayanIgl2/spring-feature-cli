@@ -5,11 +5,11 @@ import { initFeature } from '../actions/initActions.js';
 const init = new Command('init');
 
 init
-    .description()
-    .alias()
+    .description('Initialize application.properties')
+    .alias('i')
     .action(async () => {
         try {
-
+           await initFeature();
         } catch (error) {
             logger.error(error.message);
             process.exit(1);
