@@ -1,6 +1,6 @@
-import { getMainClassFile } from '../utils/projectScanner.js';
 import fs from 'fs';
 import path from 'path';
+import { getMainClassFile } from '../utils/projectScanner.js';
 
 export function getMainClassDirectory() {
     return path.dirname(getMainClassFile());

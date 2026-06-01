@@ -1,11 +1,12 @@
-import { runValidations } from '../utils/runValidations.js';
-import { getMainClassDirectory, getRootPackage } from '../utils/javaPackageResolver.js'
-import { logger } from '../utils/logger.js';
-import { renderTemplate } from '../utils/templateCompiler.js'
 import fs from 'fs';
 import path from 'path';
-import validations from '../validations/generateValidations.js';
 import { fileURLToPath } from 'url';
+
+import validations from '../validations/generateValidations.js';
+import { runValidations } from '../utils/runValidations.js';
+import { getMainClassDirectory, getRootPackage } from '../utils/javaPackageResolver.js';
+import { logger } from '../utils/logger.js';
+import { renderTemplate } from '../utils/templateCompiler.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

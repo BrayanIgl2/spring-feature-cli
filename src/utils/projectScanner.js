@@ -3,13 +3,21 @@ import path from 'path';
 
 export function getMainClassFile() {
     const rootPath = findProjectRoot();
-    let current = path.join(rootPath, 'src', 'main', 'java');
+    const current = path.join(rootPath, 'src', 'main', 'java');
 
-    const FilePath = searchInDirectory(current);
-    if(!FilePath) throw new Error('@SpringBootApplication not found');
-    return FilePath;
+    const filePath = searchInDirectory(current);
+    if(!filePath) throw new Error('@SpringBootApplication not found');
+    return filePath;
 
 }
+export function getPropertiesFile(){
+    const rootPath = findProjectRoot();
+
+    const filePath = path.join(rootPath,'src','main','resources','application.properties');
+    if(!filePath) throw new Error('application.properties not found');
+    return filePath;
+}
+
 
 function searchInDirectory(DirectoryPath) {
     const files = fs.readdirSync(DirectoryPath);
