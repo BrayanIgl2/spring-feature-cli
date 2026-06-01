@@ -7,13 +7,13 @@ import jakarta.persistence.GenerationType;
 
 
 @Entity
-public class {{featureName}} {
+public class {{capitalizedName}} {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    public {{featureName}}() {
+    public {{capitalizedName}}() {
     }
 
      public Long getId() {

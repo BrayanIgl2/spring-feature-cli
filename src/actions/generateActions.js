@@ -23,27 +23,28 @@ export function generateFeature(featureName) {
 }
 
 function generateFeatureStructure({ featureName, javaPath, packageName }) {
+    const capitalizedName = featureName.charAt(0).toUpperCase() + featureName.slice(1).toLowerCase();
     const templatesBasePath = path.join(__dirname, '..', 'templates');
-    const template_context = { featureName, packageName };
+    const template_context = { featureName, packageName, capitalizedName };
     const structure = {
         domain: {
-            featureName: `${featureName}.java`,
+            featureName: `${capitalizedName}.java`,
             templatePath: path.join(templatesBasePath, 'domain', 'Entity.hbs')
         },
         service: {
-            featureName: `${featureName}Service.java`,
+            featureName: `${capitalizedName}Service.java`,
             templatePath: path.join(templatesBasePath, 'service', 'Service.hbs')
 
 
         },
         controller: {
-            featureName: `${featureName}Controller.java`,
+            featureName: `${capitalizedName}Controller.java`,
             templatePath: path.join(templatesBasePath, 'controller', 'Controller.hbs')
 
 
         },
         repository: {
-            featureName: `${featureName}Repository.java`,
+            featureName: `${capitalizedName}Repository.java`,
             templatePath: path.join(templatesBasePath, 'repository', 'Repository.hbs')
 
         }
