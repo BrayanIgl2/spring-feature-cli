@@ -25,7 +25,7 @@ export function generateFeature(featureName) {
 
 function generateFeatureStructure({ featureName, javaPath, packageName }) {
     const capitalizedName = featureName.charAt(0).toUpperCase() + featureName.slice(1).toLowerCase();
-    const templatesBasePath = path.join(__dirname, '..', 'templates');
+    const templatesBasePath = path.join(__dirname, '..', 'templates','feature');
     const template_context = { featureName, packageName, capitalizedName };
     
     const structure = {

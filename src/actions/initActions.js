@@ -8,7 +8,7 @@ import { runValidations } from '../utils/runValidations.js';
 import { renderTemplate } from '../utils/templateCompiler.js';
 import { getPropertiesFile } from '../utils/projectScanner.js'
 import { db_engines } from '../config/db_engines.js';
-import validations from '../validations/initValidations.js';
+//import validations from '../validations/initValidations.js';
 
 
 const __filename = fileURLToPath(import.meta.url);

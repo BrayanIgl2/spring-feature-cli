@@ -1,20 +1,16 @@
 # DATASOURCE
-
 spring.datasource.url = {{jdbcUrl}}{{db_name}}
 spring.datasource.username = {{username}}
 spring.datasource.password = {{password}}
 spring.datasource.driver-class-name = {{driver}}
 
-
 # JPA / HIBERNATE
-
 spring.jpa.hibernate.ddl-auto = {{ddl_selected}}
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.{{dialect}}
 spring.jpa.properties.hibernate.format_sql = true
 spring.jpa.properties.hibernate.jdbc.time_zone = UTC
 
 # LOGGING (SQL DEBUG)
-
 spring.jpa.show-sql = true
 logging.level.org.hibernate.SQL = DEBUG
 logging.level.org.hibernate.type.descriptor.sql.BasicBinder = TRACE
