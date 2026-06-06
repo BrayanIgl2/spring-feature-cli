@@ -5,7 +5,8 @@ export function getPropertiesFile(){
     const rootPath = findProjectRoot();
 
     const filePath = path.join(rootPath,'src','main','resources','application.properties');
-    if(!filePath) throw new Error('application.properties not found');
+    if(!fs.existsSync(filePath)) throw new Error('application.properties not found');
+
     return filePath;
 }
 
@@ -20,11 +21,11 @@ export function getMainClassFile() {
 }
 
 
-function searchInDirectory(DirectoryPath) {
-    const files = fs.readdirSync(DirectoryPath);
+function searchInDirectory(directoryPath) {
+    const files = fs.readdirSync(directoryPath);
 
     for (const file of files) {
-        const filePath = path.join(DirectoryPath, file)
+        const filePath = path.join(directoryPath, file)
         const stats = fs.statSync(filePath);
 
         if (stats.isFile() && file.endsWith(".java")) {
