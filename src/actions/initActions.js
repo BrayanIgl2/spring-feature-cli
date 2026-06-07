@@ -16,8 +16,10 @@ const __dirname = path.dirname(__filename);
 export async function initFeature() {
     const file = getPropertiesFile();
     const template_context = await wizard();
-    const template_path = path.join(__dirname, '..', 'templates', 'configuration', 'spring', 'application.properties.hbs');
+    
+    if(!template_context) return;
 
+    const template_path = path.join(__dirname, '..', 'templates', 'configuration', 'spring', 'application.properties.hbs');
     const content = renderTemplate(template_path, template_context);
     fs.writeFileSync(file, content);
 }
