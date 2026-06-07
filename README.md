@@ -55,6 +55,23 @@ The CLI generates:
 - Service  
 - Controller  
 
+### Initialize application.properties:
+
+```bash
+spfc init
+```
+or
+```bash
+spfc i
+```
+Launches an interactive wizard to configure your application.properties. Prompts for:
+
+- Database engine (PostgreSQL, MySQL, H2)
+- DDL auto strategy (create, update, validate, none)
+- Database name, username, and password
+- Generates and writes the file automatically into your Spring Boot project.
+
+
 All based on Handlebars templates and a consistent naming convention.
 
 ## 📁 Project Structure
