@@ -1,7 +1,7 @@
 {
   "name": "spring-feature-cli",
   "version": "0.3.1",
-  "description": "CLI para generar features de Spring Boot",
+  "description": "CLI to generate Spring Boot boilerplate",
   "type": "module",
   "bin": {
     "spfc": "bin/index.js"

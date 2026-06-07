@@ -97,7 +97,7 @@ All based on Handlebars templates and a consistent naming convention.
 
 ## ⚠️ Requirements
 
-- Node.js >= 16  
+- Node.js >= 18 
 
 ---
 

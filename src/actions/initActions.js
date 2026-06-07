@@ -53,12 +53,12 @@ async function wizard() {
 
     const psswd = await password({
         message: 'Password: ',
-        validate: engine === 'h2' ? true : notEmpty
+        validate: engine === 'h2' ? undefined : notEmpty
 
     })
 
 
-    console.log(`\n ${chalk.cyan('Configuration resume')}`)
+    console.log(`\n ${chalk.cyan('Configuration summary')}`)
     console.log(`${chalk.dim('Engine: ')} ${engine}`)
     console.log(`${chalk.dim('DDL auto Strategy: ')} ${ddl}`)
     console.log(`${chalk.dim('Database name: ')} ${db_name}`)
@@ -74,5 +74,5 @@ async function wizard() {
         }
         return context;
     }
-    throw new Error("Cancelled");
+    console.log(chalk.red("Cancelled"));
 }
