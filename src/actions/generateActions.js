@@ -30,7 +30,7 @@ function generateFeatureStructure({ featureName, javaPath, packageName }) {
     const template_context = { featureName, packageName, capitalizedName };
 
     for (const [folder, file] of Object.entries(structure)) {
-        const folderPath = path.join(javaPath, featureName, folder);
+        const folderPath = path.join(javaPath, file.folder(featureName), folder);
 
         const fullPath = path.join(templatesBasePath,file.templatePath);
         const fileName = file.featureName(capitalizedName);
