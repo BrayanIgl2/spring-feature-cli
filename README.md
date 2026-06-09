@@ -1,110 +1,90 @@
 # spring-feature-cli
 
-`spring-feature-cli` is a Node.js CLI tool that generates Spring Boot feature-based boilerplate using templates.
+[![npm version](https://img.shields.io/npm/v/spring-feature-cli.svg)](https://www.npmjs.com/package/spring-feature-cli)
+[![license](https://img.shields.io/npm/l/spring-feature-cli.svg)](./LICENSE)
+[![node](https://img.shields.io/badge/node-%3E%3D20.17-brightgreen.svg)](https://nodejs.org)
 
-It helps automate the creation of common backend layers such as entities, services, repositories, and controllers following a clean and consistent structure.
+`spring-feature-cli` (`spfc`) generates complete, feature-based vertical slices — entity, repository, service and controller — with consistent naming and package structure, in a single command. It can also configure your `application.properties` through an interactive wizard.
 
----
+## Why
 
-## Purpose
+Every new feature in a Spring Boot project starts the same way: create four files across four packages, wire up the same imports, repeat the same naming conventions. Doing it by hand is slow and error-prone; copying from an existing feature drags leftover code along. `spfc` automates that first step so every feature starts clean and consistent.
 
-This project was built to:
-
-- Practice building real-world CLI tools with Node.js
-- Learn `commander`, `inquirer`, and `handlebars`
-- Automate repetitive Spring Boot boilerplate generation
-- Apply feature-based architecture patterns
-
----
-
-## ⚙️ Installation
-
-### Global installation (recommended)
+## Installation
 
 ```bash
 npm install -g spring-feature-cli
 ```
 
-### Local usage (development)
-```bash
-npm install
-npm run dev
-```
-
 ## Usage
 
-### Generate a Spring Boot feature:
+### Generate a feature
+
+Run inside your Spring Boot project:
 
 ```bash
-spfc generate User
+spfc generate user
+# or
+spfc g user
 ```
 
-or
+The CLI detects your root package automatically (from the class annotated with `@SpringBootApplication`) and generates:
 
-```bash
-spfc g User 
 ```
-This will generate a full structure for the feature (Entity, Repository, Service, Controller).
+src/main/java/com/example/app/
+└── user/
+    ├── controller/UserController.java
+    ├── domain/User.java
+    ├── repository/UserRepository.java
+    └── service/UserService.java
+```
 
-### 🧱 Generated Structure
+- **`User`** — JPA entity with an auto-generated `Long` id
+- **`UserRepository`** — Spring Data `JpaRepository`
+- **`UserService`** — `@Service` stub ready to fill in
+- **`UserController`** — `@RestController` mapped to `/api/user`
 
-The CLI generates:
-
-- Entity  
-- Repository  
-- Service  
-- Controller  
-
-### Initialize application.properties:
+### Configure application.properties
 
 ```bash
 spfc init
-```
-or
-```bash
+# or
 spfc i
 ```
-Launches an interactive wizard to configure your application.properties. Prompts for:
 
-- Database engine (PostgreSQL, MySQL, H2)
-- DDL auto strategy (create, update, validate, none)
-- Database name, username, and password
-- Generates and writes the file automatically into your Spring Boot project.
+Launches an interactive wizard that asks for:
 
+- Database engine (PostgreSQL, MySQL or H2)
+- Hibernate `ddl-auto` strategy (`create`, `update`, `validate`, `none`)
+- Database name, username and password
 
-All based on Handlebars templates and a consistent naming convention.
+It shows a configuration summary, asks for confirmation, and writes `src/main/resources/application.properties` with the datasource, JPA/Hibernate and SQL-logging settings. The existing file is only overwritten after explicit confirmation.
 
-## 📁 Project Structure
+## How it works
 
-- `bin/index.js` → CLI entry point  
-- `src/index.js` → Main CLI logic  
-- `src/commands/` → Command definitions  
-- `src/actions/` → Generation logic  
-- `src/validations/` → Input validation layer  
-- `src/utils/` → Helpers (logging, scanning, template compilation, etc.)  
-- `src/templates/` → Handlebars templates for generated code  
+1. Walks up from the current directory until it finds a `pom.xml` containing `spring-boot-starter` (project root detection).
+2. Locates the `@SpringBootApplication` class and reads its `package` declaration to resolve the root package.
+3. Renders Handlebars templates with the feature and package context, and writes the files following a feature-based (vertical slice) structure.
 
----
+## Requirements
 
-## 🧰 Key Dependencies
+- Node.js >= 20.17
+- A Maven-based Spring Boot project (`pom.xml` with `spring-boot-starter`)
 
-- `commander` → CLI command handling  
-- `inquirer` → Interactive prompts  
-- `handlebars` → Template engine  
-- `chalk` → Terminal styling  
+## Project structure
 
----
+```
+bin/index.js        → CLI entry point
+src/commands/       → Command definitions (commander)
+src/actions/        → Generation and wizard logic
+src/validations/    → Input validation layer
+src/utils/          → Project scanning, package resolution, template rendering, logging
+src/templates/      → Handlebars templates for the generated code
+src/config/         → Architecture layouts and DB engine presets
+```
 
-## ⚠️ Requirements
+Built with [commander](https://www.npmjs.com/package/commander), [@inquirer/prompts](https://www.npmjs.com/package/@inquirer/prompts), [handlebars](https://www.npmjs.com/package/handlebars) and [chalk](https://www.npmjs.com/package/chalk).
 
-- Node.js >= 18 
+## License
 
----
-
-## 💡 Notes
-
-This tool assumes a Spring Boot project structure and is intended to be used inside a backend project where Java packages are detected automatically.
-
-📄 License
-
-MIT
+[MIT](./LICENSE)

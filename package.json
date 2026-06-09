@@ -1,5 +1,17 @@
 {
   "name": "spring-feature-cli",
+  "author": "Brayan Iglesias Pereira <iglesiasbrayan2@gmail.com> (https://github.com/BrayanIgl2)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrayanIgl2/spring-feature-cli.git"
+  },
+  "homepage": "https://github.com/BrayanIgl2/spring-feature-cli#readme",
+  "bugs": {
+    "url": "https://github.com/BrayanIgl2/spring-feature-cli/issues"
+  },
+  "engines": {
+    "node": ">=20.17.0"
+  },
   "version": "0.3.2",
   "description": "CLI to generate Spring Boot boilerplate",
   "type": "module",
