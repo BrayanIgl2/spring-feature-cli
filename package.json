@@ -21,9 +21,9 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@inquirer/prompts": "^8.5.2",
     "chalk": "^5.4.1",
     "commander": "^13.1.0",
-    "handlebars": "^4.7.9",
-    "inquirer": "^12.1.0"
+    "handlebars": "^4.7.9"
   }
 }
