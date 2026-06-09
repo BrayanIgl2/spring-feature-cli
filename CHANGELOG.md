@@ -6,7 +6,7 @@
 - Package description updated to English
 
 ### Refactored
-- Feature layer structure moved to `src/config/architectures/feature_based.js`
+- Feature layer structure moved to `src/config/architectures/featureBased.js`
 
 ## [0.3.0] - 2026-06-07
 ### Added

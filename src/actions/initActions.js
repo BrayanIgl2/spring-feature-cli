@@ -8,19 +8,19 @@ import { renderTemplate } from '../utils/templateCompiler.js';
 import { getPropertiesFile } from '../utils/projectScanner.js';
 import { chainRunValidations } from '../utils/runValidations.js'
 import { notEmpty, minLength, validDbName } from '../validations/initValidations.js';
-import { db_engines } from '../config/db_engines.js';
+import { dbEngines } from '../config/dbEngines.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export async function initFeature() {
     const file = getPropertiesFile();
-    const template_context = await wizard();
+    const templateContext = await wizard();
     
-    if(!template_context) return;
+    if(!templateContext) return;
 
-    const template_path = path.join(__dirname, '..', 'templates', 'configuration', 'spring', 'application.properties.hbs');
-    const content = renderTemplate(template_path, template_context);
+    const templatePath = path.join(__dirname, '..', 'templates', 'configuration', 'spring', 'application.properties.hbs');
+    const content = renderTemplate(templatePath, templateContext);
     fs.writeFileSync(file, content);
 }
 async function wizard() {
@@ -41,9 +41,9 @@ async function wizard() {
             { name: 'none', value: 'none' }
         ]
     })
-    const engine_context = db_engines[engine];
+    const engineContext = dbEngines[engine];
 
-    const db_name = await input({
+    const dbName = await input({
         message: 'Database name: ',
         validate: chainRunValidations(notEmpty, minLength(3), validDbName)
     });
@@ -63,7 +63,7 @@ async function wizard() {
     console.log(`\n ${chalk.cyan('Configuration summary')}`)
     console.log(`${chalk.dim('Engine: ')} ${engine}`)
     console.log(`${chalk.dim('DDL auto Strategy: ')} ${ddl}`)
-    console.log(`${chalk.dim('Database name: ')} ${db_name}`)
+    console.log(`${chalk.dim('Database name: ')} ${dbName}`)
     console.log(`${chalk.dim('username: ')} ${username}`)
     console.log(`${chalk.dim('password: ')} ${'*'.repeat(psswd.length)} \n `)
 
@@ -72,7 +72,7 @@ async function wizard() {
     })
     if (proceed) {
         const context = {
-            ...engine_context, ddl, db_name, username, password: psswd,
+            ...engineContext, ddl, dbName, username, password: psswd,
         }
         return context;
     }
